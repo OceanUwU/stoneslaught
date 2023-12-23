@@ -1,0 +1,8 @@
+name=Stoneslaught
+author=ocean
+description=Dodge falling rocks!
+bundleID=lol.ocean.stoneslaught
+version=1.0
+buildNumber=1
+imagePath=system
+launchSoundPath=
