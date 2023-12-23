@@ -45,6 +45,7 @@ function Player:update()
         self.flip = unFlipped
     elseif (left and not right) then
         self.x = self.x - moveSpeed
+        if (self.x < 8) then self.x = 8 end
         self.state = states.run
         self.flip = flipped
     else
