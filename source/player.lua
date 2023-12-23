@@ -53,7 +53,7 @@ function Player:update()
     local left = playdate.buttonIsPressed(playdate.kButtonLeft)
     local right = playdate.buttonIsPressed(playdate.kButtonRight)
     if self.state == states.jumping then 
-        self.y = baseY - math.sin((playdate.getElapsedTime() - self.jumpStart) * 5) * 32
+        self.y = baseY - (1 - math.pow(2 * (playdate.getElapsedTime() - self.jumpStart) / 0.8 - 1, 2)) * 50
         if self.y > baseY then self:startLevel() end
     elseif self.state == states.dead then
         self.y = baseY
