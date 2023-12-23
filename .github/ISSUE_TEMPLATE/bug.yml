@@ -1,0 +1,18 @@
+name: Report a Bug
+description: Something not working correctly
+title: "[Bug]: <title and short description>"
+labels: ["bug"]
+projects: ["OceanUwU/1"]
+assignees:
+  - octocat
+body:
+  - type: textarea
+    id: desc
+    attributes:
+      label: What is the bug that you found?
+      description: Describe the bug. Provide screenshots if available.
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Instructions to reproduce
+      description: How did you encounter the bug? Provide instructions on how to reproduce this behaviour.

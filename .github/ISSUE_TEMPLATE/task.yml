@@ -1,0 +1,18 @@
+name: Specify a Task
+description: Something to be done
+title: "[Task]: <title and short description>"
+labels: ["task"]
+projects: ["OceanUwU/1"]
+assignees:
+  - octocat
+body:
+  - type: textarea
+    id: desc
+    attributes:
+      label: What needs to be done?
+      description: Describe the task.
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions for issue to be closed
+      description: Provide a list of bullet points of things that need to be done in order to complete this issue.

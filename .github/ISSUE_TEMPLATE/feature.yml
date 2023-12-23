@@ -1,0 +1,18 @@
+name: Request a Feature
+description: Something new to be added
+title: "[Feature]: <title and short description>"
+labels: ["feature"]
+projects: ["OceanUwU/1"]
+assignees:
+  - octocat
+body:
+  - type: textarea
+    id: desc
+    attributes:
+      label: What is the feature to be added?
+      description: Describe the feature.
+  - type: textarea
+    id: conditions
+    attributes:
+      label: Conditions for issue to be closed
+      description: Provide a list of bullet points of things that need to be done in order to complete this issue.
