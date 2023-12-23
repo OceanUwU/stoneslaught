@@ -10,6 +10,7 @@ local moveSpeed<const> = 6
 
 function Player:init()
     self.flip = unFlipped
+    self.score = 0
     self:startLevel()
 
     local imgTable = playdate.graphics.imagetable.new("assets/img/player")
@@ -36,27 +37,41 @@ function Player:init()
 end
 
 function Player:startLevel()
+    self.score = self.score + 1
     self.state = states.idle
     self.x = 20
+end
+
+function Player:winLevel()
+    self.x = goalX
+    self.state = states.jumping
+    self.jumpStart = playdate.getElapsedTime()
 end
 
 function Player:update()
     local left = playdate.buttonIsPressed(playdate.kButtonLeft)
     local right = playdate.buttonIsPressed(playdate.kButtonRight)
-    if (right and not left) then
-        self.x = self.x + moveSpeed
-        self.state = states.run
-        self.flip = unFlipped
-    elseif (left and not right) then
-        self.x = self.x - moveSpeed
-        if (self.x < 8) then self.x = 8 end
-        self.state = states.run
-        self.flip = flipped
+    if self.state == states.jumping then 
+        self.y = baseY - math.sin((playdate.getElapsedTime() - self.jumpStart) * 5) * 32
+        if self.y > baseY then self:startLevel() end
+    elseif self.state == states.dead then
+        self.y = baseY
     else
-        self.state = states.idle
+        self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
+        if right and not left then
+            self.x = self.x + moveSpeed
+            self.state = states.run
+            self.flip = unFlipped
+            if self.x >= goalX then self:winLevel() end
+        elseif left and not right then
+            self.x = self.x - moveSpeed
+            if self.x < 8 then self.x = 8 end
+            self.state = states.run
+            self.flip = flipped
+        else
+            self.state = states.idle
+        end
     end
-
-    self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
 
     self.sprite:moveTo(self.x, self.y)
 end
