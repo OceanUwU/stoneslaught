@@ -40,6 +40,7 @@ function Player:startLevel()
     self.score = self.score + 1
     self.state = states.idle
     self.x = 20
+    self.y = baseY
 end
 
 function Player:winLevel()
