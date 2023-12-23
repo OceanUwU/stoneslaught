@@ -2,7 +2,6 @@ name: Specify a Task
 description: Something to be done
 title: "[Task]: <title and short description>"
 labels: ["task"]
-projects: ["OceanUwU/1"]
 assignees:
   - octocat
 body:

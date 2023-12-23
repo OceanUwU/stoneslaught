@@ -2,7 +2,6 @@ name: Request a Feature
 description: Something new to be added
 title: "[Feature]: <title and short description>"
 labels: ["feature"]
-projects: ["OceanUwU/1"]
 assignees:
   - octocat
 body:

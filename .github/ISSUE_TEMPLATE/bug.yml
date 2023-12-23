@@ -2,7 +2,6 @@ name: Report a Bug
 description: Something not working correctly
 title: "[Bug]: <title and short description>"
 labels: ["bug"]
-projects: ["OceanUwU/1"]
 assignees:
   - octocat
 body:
