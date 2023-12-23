@@ -17,8 +17,8 @@
             "dependsOrder": "sequence",
             "problemMatcher": [],
             "group": {
-            "kind": "build",
-            "isDefault": true
+                "kind": "build",
+                "isDefault": true
             }
         }
     ]
