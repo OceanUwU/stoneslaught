@@ -4,7 +4,8 @@ local states<const> = {idle = 1, run = 2, jumping = 3, dead = 4}
 local animFrameTime<const> = 40
 local unFlipped<const> = playdate.graphics.kImageUnflipped
 local flipped<const> = playdate.graphics.kImageFlippedX
-local moveSpeed = 6
+local baseY<const> = 240 - 12
+local moveSpeed<const> = 6
 
 function Player:init()
     self.flip = unFlipped
@@ -33,7 +34,6 @@ end
 function Player:startLevel()
     self.state = states.idle
     self.x = 20
-    self.y = 240 - 12
 end
 
 function Player:update()
@@ -50,6 +50,8 @@ function Player:update()
     else
         self.state = states.idle
     end
+
+    self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
 
     self.sprite:moveTo(self.x, self.y)
 end
