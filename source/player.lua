@@ -5,6 +5,7 @@ local animFrameTime<const> = 40
 local unFlipped<const> = playdate.graphics.kImageUnflipped
 local flipped<const> = playdate.graphics.kImageFlippedX
 local baseY<const> = 240 - 12
+local goalX<const> = 400 - 20
 local moveSpeed<const> = 6
 
 function Player:init()
@@ -26,9 +27,12 @@ function Player:init()
     self.anims[states.dead].endFrame = 8
 
     self.sprite = playdate.graphics.sprite.new(self.anims[self.state]:image())
-    self.sprite:moveTo(200, 120)
     self.sprite:add()
     self.sprite.update = function() self.sprite:setImage(self.anims[self.state]:image(), self.flip) end
+
+    self.goalSprite = playdate.graphics.sprite.new(playdate.graphics.image.new("assets/img/goal"))
+    self.goalSprite:moveTo(goalX, baseY + self.sprite.height * 1.5 - self.goalSprite.height)
+    self.goalSprite:add()
 end
 
 function Player:startLevel()
