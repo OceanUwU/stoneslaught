@@ -2,9 +2,13 @@ class('Player').extends()
 
 local states<const> = {idle = 1, run = 2, jumping = 3, dead = 4}
 local animFrameTime<const> = 40
+local unFlipped<const> = playdate.graphics.kImageUnflipped
+local flipped<const> = playdate.graphics.kImageFlippedX
+local moveSpeed = 6
 
 function Player:init()
-    self.state = states.run
+    self.flip = unFlipped
+    self:startLevel()
 
     local imgTable = playdate.graphics.imagetable.new("assets/img/player")
     self.anims = {}
@@ -23,9 +27,29 @@ function Player:init()
     self.sprite = playdate.graphics.sprite.new(self.anims[self.state]:image())
     self.sprite:moveTo(200, 120)
     self.sprite:add()
-    self.sprite.update = function() self.sprite:setImage(self.anims[self.state]:image()) end
+    self.sprite.update = function() self.sprite:setImage(self.anims[self.state]:image(), self.flip) end
+end
+
+function Player:startLevel()
+    self.state = states.idle
+    self.x = 20
+    self.y = 240 - 12
 end
 
 function Player:update()
+    local left = playdate.buttonIsPressed(playdate.kButtonLeft)
+    local right = playdate.buttonIsPressed(playdate.kButtonRight)
+    if (right and not left) then
+        self.x = self.x + moveSpeed
+        self.state = states.run
+        self.flip = unFlipped
+    elseif (left and not right) then
+        self.x = self.x - moveSpeed
+        self.state = states.run
+        self.flip = flipped
+    else
+        self.state = states.idle
+    end
 
+    self.sprite:moveTo(self.x, self.y)
 end
