@@ -37,6 +37,11 @@ function Player:init()
     self.goalSprite:moveTo(goalX, baseY + self.sprite.height * 1.5 - self.goalSprite.height)
     self.goalSprite:add()
 
+    self.celebrationSprite = playdate.graphics.animation.loop.new(40, playdate.graphics.imagetable.new("assets/img/stars"))
+    self.celebrationSprite.endFrame = 16
+    self.celebrationSprite.frame = 16
+    self.celebrationSprite.shouldLoop = false
+
     self.score = Score(self.goalSprite.x, self.goalSprite.y)
     self:reset()
 end
@@ -56,6 +61,7 @@ function Player:winLevel()
     self.x = goalX
     self.state = states.jumping
     self.jumpStart = playdate.getElapsedTime()
+    self.celebrationSprite.frame = 1
 end
 
 function Player:update()
@@ -92,4 +98,10 @@ function Player:update()
     end
 
     self.sprite:moveTo(self.x, self.y)
+end
+
+function Player:draw()
+    if self.celebrationSprite.frame < self.celebrationSprite.endFrame then
+        self.celebrationSprite:draw(self.goalSprite.x - self.celebrationSprite:image().width / 2, self.goalSprite.y - self.celebrationSprite:image().height / 2)
+    end
 end

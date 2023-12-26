@@ -29,6 +29,8 @@ playdate.update = function()
 
     playdate.graphics.sprite.update()
     playdate.timer.updateTimers()
+
+    player:draw()
 end
 
 setupGame()
