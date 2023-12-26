@@ -7,7 +7,6 @@ function Score:init(goalX, goalY)
     if gameData then
         self.highScore = gameData.hs
     end
-    print(self.highScore)
     self.goalX = goalX
     self.goalY = goalY
 

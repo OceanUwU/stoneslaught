@@ -7,6 +7,7 @@ import "player"
 import "sky"
 
 function setupGame()
+    playdate.display.setRefreshRate(50)
     player = Player()
     sky = Sky()
 end
