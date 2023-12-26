@@ -15,6 +15,7 @@ function Rock:init(x)
     self.sprite:add()
     self.y = -self.sprite.height/2
     self.sinkTimer = playdate.timer.new(sinkTime, self.y, self.y + self.sprite.height)
+    self.fallSound = playdate.sound.sampleplayer.new("assets/audio/rock" .. math.random(1,5))
 end
 
 function Rock:update()
@@ -23,6 +24,7 @@ function Rock:update()
         self.fallVel = self.fallVel + 0.2
         if self.y >= 240 + self.sprite.height / 2 then
             self.done = true
+            self.fallSound:play()
         end
     else
         self.y = self.sinkTimer.value
