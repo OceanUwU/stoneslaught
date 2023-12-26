@@ -42,6 +42,11 @@ function Player:init()
     self.celebrationSprite.frame = 16
     self.celebrationSprite.shouldLoop = false
 
+    self.dieSprite = playdate.graphics.animation.loop.new(30, playdate.graphics.imagetable.new("assets/img/triangles"))
+    self.dieSprite.endFrame = 16
+    self.dieSprite.frame = 16
+    self.dieSprite.shouldLoop = false
+
     self.winSound = playdate.sound.sampleplayer.new("assets/audio/win1")
     self.dieSound = playdate.sound.sampleplayer.new("assets/audio/die")
 
@@ -98,6 +103,7 @@ function Player:update()
         if #self.sprite:overlappingSprites() > 0 then
             self.state = states.dead
             self.y = baseY
+            self.dieSprite.frame = 1
             endGame()
             self.dieSound:play()
         end
@@ -109,5 +115,8 @@ end
 function Player:draw()
     if self.celebrationSprite.frame < self.celebrationSprite.endFrame then
         self.celebrationSprite:draw(self.goalSprite.x - self.celebrationSprite:image().width / 2, self.goalSprite.y - self.celebrationSprite:image().height / 2)
+    end
+    if self.dieSprite.frame < self.dieSprite.endFrame then
+        self.dieSprite:draw(self.x - self.dieSprite:image().width / 2, self.y - self.dieSprite:image().height / 2)
     end
 end
