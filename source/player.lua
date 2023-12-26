@@ -69,12 +69,13 @@ function Player:update()
         end
     else
         self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
-        if playdate.buttonIsPressed(playdate.kButtonRight) then
+        local crankChange = playdate.getCrankChange()
+        if playdate.buttonIsPressed(playdate.kButtonRight) or crankChange > 0 then
             self.x = self.x + moveSpeed
             self.state = states.run
             self.flip = unFlipped
             if self.x >= goalX then self:winLevel() end
-        elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
+        elseif playdate.buttonIsPressed(playdate.kButtonLeft) or crankChange < 0 then
             self.x = self.x - moveSpeed
             if self.x < 8 then self.x = 8 end
             self.state = states.run
