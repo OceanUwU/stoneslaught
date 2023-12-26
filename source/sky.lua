@@ -15,16 +15,11 @@ function Sky:init()
         self.descendingRocks[i] = 0
     end
     self.fallingRocks = {}
-
-    --testing spawn timer
-    self:start()
-    self.n = 0
 end
 
 function Sky:start()
     self.active = true
     self.nextSpawn = 0
-    playdate.resetElapsedTime()
 end
 
 function Sky:update()
@@ -48,8 +43,6 @@ function Sky:update()
         if timeToNextOne > 0 then
             self.nextSpawn = self.nextSpawn + timeToNextOne
         end
-        self.n = self.n + 1
-        print(self.n, t)
     end
 
     --update rocks

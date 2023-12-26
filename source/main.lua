@@ -12,6 +12,13 @@ function setupGame()
     sky = Sky()
 end
 
+function startNewGame()
+    playdate.resetElapsedTime()
+    sky:start()
+    player.score:updateScore(0)
+    player:reset()
+end
+
 function endGame()
     sky.active = false
 end
@@ -25,3 +32,4 @@ playdate.update = function()
 end
 
 setupGame()
+startNewGame() --TODO: make title screen and move this there

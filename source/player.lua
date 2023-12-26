@@ -64,6 +64,9 @@ function Player:update()
         if self.y > baseY then self:startLevel() end
     elseif self.state == states.dead then
         self.y = baseY
+        if playdate.buttonIsPressed(playdate.kButtonA) then
+            startNewGame()
+        end
     else
         self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
         if playdate.buttonIsPressed(playdate.kButtonRight) then
