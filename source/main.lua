@@ -14,6 +14,6 @@ setupGame()
 playdate.update = function()
     player:update()
 
-    pd.graphics.sprite.update()
-    pd.timer.updateTimers()
+    playdate.graphics.sprite.update()
+    playdate.timer.updateTimers()
 end

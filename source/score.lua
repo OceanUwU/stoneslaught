@@ -3,6 +3,11 @@ class('Score').extends(playdate.graphics.sprite)
 function Score:init(goalX, goalY)
     self.score = 0
     self.highScore = 0
+    local gameData = playdate.datastore.read()
+    if gameData then
+        self.highScore = gameData.hs
+    end
+    print(self.highScore)
     self.goalX = goalX
     self.goalY = goalY
 
@@ -16,6 +21,7 @@ function Score:updateScore(score)
     self.score = score
     if self.score > self.highScore then
         self.highScore = self.score
+        playdate.datastore.write({hs = self.highScore})
     end
     
     --render
