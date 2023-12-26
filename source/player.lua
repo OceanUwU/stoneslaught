@@ -79,6 +79,12 @@ function Player:update()
         else
             self.state = states.idle
         end
+
+        if #self.sprite:overlappingSprites() > 0 then
+            self.state = states.dead
+            self.y = baseY
+            endGame()
+        end
     end
 
     self.sprite:moveTo(self.x, self.y)

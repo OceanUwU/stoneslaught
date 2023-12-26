@@ -12,12 +12,16 @@ function setupGame()
     sky = Sky()
 end
 
-setupGame()
+function endGame()
+    sky.active = false
+end
 
 playdate.update = function()
-    player:update()
     sky:update()
+    player:update()
 
     playdate.graphics.sprite.update()
     playdate.timer.updateTimers()
 end
+
+setupGame()

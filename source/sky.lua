@@ -9,6 +9,7 @@ local endX<const> = startX + slots * slotSize
 local startingRockGapTime<const> = 0.5
 
 function Sky:init()
+    self.active = false
     self.descendingRocks = {}
     for i = 1, slots do
         self.descendingRocks[i] = 0
@@ -16,19 +17,20 @@ function Sky:init()
     self.fallingRocks = {}
 
     --testing spawn timer
-    Sky:start()
+    self:start()
     self.n = 0
 end
 
 function Sky:start()
-    playdate.resetElapsedTime()
+    self.active = true
     self.nextSpawn = 0
+    playdate.resetElapsedTime()
 end
 
 function Sky:update()
     --logic for spawning new rocks
     local t = playdate.getElapsedTime()
-    if t > self.nextSpawn then
+    if self.active and t > self.nextSpawn then
         local availableSlots = {}
         for i = 0, slots do
             if self.descendingRocks[i] == 0 then
