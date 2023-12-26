@@ -43,11 +43,9 @@ function Sky:update()
         if t > 0 then 
             timeToNextOne = (-math.pow(t, 2) + 200 * t) / (2 * math.pow(t, 2) + 200 * t) * startingRockGapTime
         end
-        timeToNextOne = 0.0001 -- TEST
         if timeToNextOne > 0 then
             self.nextSpawn = self.nextSpawn + timeToNextOne
         end
-
         self.n = self.n + 1
         print(self.n, t)
     end

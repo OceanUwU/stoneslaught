@@ -7,6 +7,7 @@ function Rock:init(x)
     self.done = false
     self.x = x
     self.falling = false
+    self.fallVel = 2
 
     self.sprite = playdate.graphics.sprite.new(img)
     self.sprite:setImage(img, math.random(0, 3))
@@ -17,7 +18,8 @@ end
 
 function Rock:update()
     if self.falling then
-        self.y = self.y + 4
+        self.y = self.y + math.floor(self.fallVel)
+        self.fallVel = self.fallVel + 0.2
         if self.y >= 240 + self.sprite.height / 2 then
             self.done = true
         end
