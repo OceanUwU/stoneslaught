@@ -43,6 +43,7 @@ function Player:init()
     self.celebrationSprite.shouldLoop = false
 
     self.winSound = playdate.sound.sampleplayer.new("assets/audio/win1")
+    self.dieSound = playdate.sound.sampleplayer.new("assets/audio/die")
 
     self.score = Score(self.goalSprite.x, self.goalSprite.y)
     self:reset()
@@ -98,6 +99,7 @@ function Player:update()
             self.state = states.dead
             self.y = baseY
             endGame()
+            self.dieSound:play()
         end
     end
 
