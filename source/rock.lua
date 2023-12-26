@@ -11,6 +11,7 @@ function Rock:init(x)
 
     self.sprite = playdate.graphics.sprite.new(img)
     self.sprite:setImage(img, math.random(0, 3))
+    self.sprite:setCollideRect(1, 1, self.sprite.width - 2, self.sprite.height - 2)
     self.sprite:add()
     self.y = -self.sprite.height/2
     self.sinkTimer = playdate.timer.new(sinkTime, self.y, self.y + self.sprite.height)

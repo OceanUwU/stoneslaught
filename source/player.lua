@@ -29,8 +29,9 @@ function Player:init()
     self.anims[states.dead].endFrame = 8
 
     self.sprite = playdate.graphics.sprite.new(self.anims[self.state]:image())
-    self.sprite:add()
+    self.sprite:setCollideRect(1, 1, self.sprite.width - 2, self.sprite.height - 2)
     self.sprite.update = function() self.sprite:setImage(self.anims[self.state]:image(), self.flip) end
+    self.sprite:add()
 
     self.goalSprite = playdate.graphics.sprite.new(playdate.graphics.image.new("assets/img/goal"))
     self.goalSprite:moveTo(goalX, baseY + self.sprite.height * 1.5 - self.goalSprite.height)
