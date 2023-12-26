@@ -9,10 +9,11 @@ local endX<const> = startX + slots * slotSize
 local startingRockGapTime<const> = 0.5
 
 function Sky:init()
-    self.rocks = {}
+    self.descendingRocks = {}
     for i = 1, slots do
-        self.rocks[i] = 0
+        self.descendingRocks[i] = 0
     end
+    self.fallingRocks = {}
 
     --testing spawn timer
     Sky:start()
@@ -30,18 +31,19 @@ function Sky:update()
     if t > self.nextSpawn then
         local availableSlots = {}
         for i = 0, slots do
-            if self.rocks[i] == 0 then
+            if self.descendingRocks[i] == 0 then
                 table.insert(availableSlots, i)
             end
         end
         if #availableSlots > 0 then
             local slot = availableSlots[math.random(#availableSlots)]
-            self.rocks[slot] = Rock(startX + slot * slotSize)
+            self.descendingRocks[slot] = Rock(startX + slot * slotSize)
         end
         local timeToNextOne = startingRockGapTime
         if t > 0 then 
             timeToNextOne = (-math.pow(t, 2) + 200 * t) / (2 * math.pow(t, 2) + 200 * t) * startingRockGapTime
         end
+        timeToNextOne = 0.0001 -- TEST
         if timeToNextOne > 0 then
             self.nextSpawn = self.nextSpawn + timeToNextOne
         end
@@ -51,12 +53,19 @@ function Sky:update()
     end
 
     --update rocks
-    for slot, rock in pairs(self.rocks) do
+    for i, rock in pairs(self.fallingRocks) do
+        rock:update()
+        if rock.done then
+            table.remove(self.fallingRocks, i)
+            rock.sprite:remove()
+        end
+    end
+    for slot, rock in pairs(self.descendingRocks) do
         if rock ~= 0 then
             rock:update()
-            if rock.done then
-                rock.sprite:remove()
-                self.rocks[slot] = 0
+            if rock.falling then
+                table.insert(self.fallingRocks, rock)
+                self.descendingRocks[slot] = 0
             end
         end
     end

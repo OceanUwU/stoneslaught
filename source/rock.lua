@@ -1,7 +1,7 @@
 class('Rock').extends()
 
 local img<const> = playdate.graphics.image.new("assets/img/rock")
-local sinkTime = 1.4 * 1000
+local sinkTime = 0.8 * 1000
 
 function Rock:init(x)
     self.done = false
