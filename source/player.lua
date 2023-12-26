@@ -1,3 +1,5 @@
+import "score"
+
 class('Player').extends()
 
 local states<const> = {idle = 1, run = 2, jumping = 3, dead = 4}
@@ -10,8 +12,7 @@ local moveSpeed<const> = 6
 
 function Player:init()
     self.flip = unFlipped
-    self.score = 0
-    self:startLevel()
+    self.state = states.idle
 
     local imgTable = playdate.graphics.imagetable.new("assets/img/player")
     self.anims = {}
@@ -34,13 +35,20 @@ function Player:init()
     self.goalSprite = playdate.graphics.sprite.new(playdate.graphics.image.new("assets/img/goal"))
     self.goalSprite:moveTo(goalX, baseY + self.sprite.height * 1.5 - self.goalSprite.height)
     self.goalSprite:add()
+
+    self.score = Score(self.goalSprite.x, self.goalSprite.y)
+    self:reset()
 end
 
-function Player:startLevel()
-    self.score = self.score + 1
+function Player:reset()
     self.state = states.idle
     self.x = 20
     self.y = baseY
+end
+
+function Player:startLevel()
+    self.score:updateScore(self.score.score + 1)
+    self:reset()
 end
 
 function Player:winLevel()
@@ -50,8 +58,6 @@ function Player:winLevel()
 end
 
 function Player:update()
-    local left = playdate.buttonIsPressed(playdate.kButtonLeft)
-    local right = playdate.buttonIsPressed(playdate.kButtonRight)
     if self.state == states.jumping then 
         self.y = baseY - (1 - math.pow(2 * (playdate.getElapsedTime() - self.jumpStart) / 0.8 - 1, 2)) * 50
         if self.y > baseY then self:startLevel() end
@@ -59,12 +65,12 @@ function Player:update()
         self.y = baseY
     else
         self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
-        if right and not left then
+        if playdate.buttonIsPressed(playdate.kButtonRight) then
             self.x = self.x + moveSpeed
             self.state = states.run
             self.flip = unFlipped
             if self.x >= goalX then self:winLevel() end
-        elseif left and not right then
+        elseif playdate.buttonIsPressed(playdate.kButtonLeft) then
             self.x = self.x - moveSpeed
             if self.x < 8 then self.x = 8 end
             self.state = states.run
