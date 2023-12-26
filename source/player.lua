@@ -8,7 +8,7 @@ local unFlipped<const> = playdate.graphics.kImageUnflipped
 local flipped<const> = playdate.graphics.kImageFlippedX
 local baseY<const> = 240 - 12
 local goalX<const> = 400 - 20
-local moveSpeed<const> = 6
+local moveSpeed<const> = 4
 
 function Player:init()
     self.flip = unFlipped

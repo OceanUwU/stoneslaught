@@ -2,9 +2,9 @@ import "rock"
 
 class('Sky').extends()
 
-local startX<const> = 84
-local slots<const> = 24
-local slotSize<const> = 10
+local startX<const> = 40
+local slots<const> = 21
+local slotSize<const> = 14
 local endX<const> = startX + slots * slotSize
 local startingRockGapTime<const> = 0.5
 
@@ -55,6 +55,7 @@ function Sky:update()
         if rock ~= 0 then
             rock:update()
             if rock.done then
+                rock.sprite:remove()
                 self.rocks[slot] = 0
             end
         end
