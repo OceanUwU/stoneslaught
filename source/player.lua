@@ -42,6 +42,8 @@ function Player:init()
     self.celebrationSprite.frame = 16
     self.celebrationSprite.shouldLoop = false
 
+    self.winSound = playdate.sound.sampleplayer.new("assets/audio/win1")
+
     self.score = Score(self.goalSprite.x, self.goalSprite.y)
     self:reset()
 end
@@ -62,6 +64,8 @@ function Player:winLevel()
     self.state = states.jumping
     self.jumpStart = playdate.getElapsedTime()
     self.celebrationSprite.frame = 1
+    self.winSound:setSample(playdate.sound.sample.new("assets/audio/win" .. (self.score.score % 3 + 1)))
+    self.winSound:play()
 end
 
 function Player:update()
