@@ -4,15 +4,18 @@ import "CoreLibs/sprites"
 import "CoreLibs/animation"
 import "CoreLibs/timer"
 import "player"
+import "sky"
 
 function setupGame()
     player = Player()
+    sky = Sky()
 end
 
 setupGame()
 
 playdate.update = function()
     player:update()
+    sky:update()
 
     playdate.graphics.sprite.update()
     playdate.timer.updateTimers()
