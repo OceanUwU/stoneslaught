@@ -2,8 +2,8 @@ import "rock"
 
 class('Sky').extends()
 
-local startX<const> = 40
-local slots<const> = 22
+local startX<const> = 54
+local slots<const> = 21
 local slotSize<const> = 14
 local endX<const> = startX + slots * slotSize
 local startingRockGapTime<const> = 0.5
