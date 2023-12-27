@@ -1,5 +1,7 @@
 class("Death").extends()
 
+local aPrompt<const> = playdate.graphics.image.new("assets/img/aprompt")
+
 function Death:init()
     self.sprite = playdate.graphics.sprite.new(playdate.graphics.image.new(1,1))
     self.sprite:moveTo(400/2, -240/2)
@@ -24,6 +26,9 @@ function Death:open(score, highScore)
     font:drawTextAligned(score .. "", img.width - 10, (img.height - font:getHeight()) / 2 + 2 - font:getHeight()/2 + 3, kTextAlignment.right)
     font:drawTextAligned("Furthest distance ever:", 10, (img.height - font:getHeight()) / 2 + 2 + font:getHeight()/2 + 3, kTextAlignment.left)
     font:drawTextAligned(highScore .. "", img.width - 10, (img.height - font:getHeight()) / 2 + 2 + font:getHeight()/2 + 3, kTextAlignment.right)
+    local promptWidth = aPrompt.width + 10 + font:getTextWidth("Retry?")
+    aPrompt:draw((img.width - promptWidth) / 2, img.height - aPrompt.height - 10)
+    font:drawTextAligned("Retry?", (img.width + promptWidth) / 2, img.height - font:getHeight() - 10, kTextAlignment.right)
 	playdate.graphics.popContext()
     self.sprite:setImage(img)
     self.moveTimer = playdate.timer.new(800, self.sprite.y, 240/2, playdate.easingFunctions.outQuad)
