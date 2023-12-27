@@ -39,7 +39,7 @@ function Death:close()
 end
 
 function Death:update()
-    if self.moveTimer ~= nil and self.moveTimer.value ~= self.moveTimer.endValue then
+    if self.moveTimer ~= nil and self.moveTimer.value ~= self.sprite.y then
         self.sprite:moveTo(self.sprite.x, self.moveTimer.value)
     end
 end
