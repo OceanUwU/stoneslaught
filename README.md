@@ -1,6 +1,6 @@
 # Stoneslaught
 
-A clone of [Raindrop Sprinters](https://store.steampowered.com/app/2566020/Raindrop_Sprinters/) for the [playdate](https://play.date).  
+A very basic clone of [Raindrop Sprinters](https://store.steampowered.com/app/2566020/Raindrop_Sprinters/) for the [playdate](https://play.date) that I made to learn its SDK.  
 
 ![stoneslaught](https://github.com/OceanUwU/stoneslaught/assets/29258858/619de5a4-9c93-4827-a599-ee5b8f535cef)
 
