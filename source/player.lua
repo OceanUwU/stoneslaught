@@ -85,27 +85,29 @@ function Player:update()
         end
     else
         self.y = baseY - math.abs(math.sin(playdate.getElapsedTime() * 7)) * 5
-        local crankChange = playdate.getCrankChange()
-        if playdate.buttonIsPressed(playdate.kButtonRight) or crankChange > 0 then
-            self.x = self.x + moveSpeed
-            self.state = states.run
-            self.flip = unFlipped
-            if self.x >= goalX then self:winLevel() end
-        elseif playdate.buttonIsPressed(playdate.kButtonLeft) or crankChange < 0 then
-            self.x = self.x - moveSpeed
-            if self.x < 8 then self.x = 8 end
-            self.state = states.run
-            self.flip = flipped
-        else
-            self.state = states.idle
-        end
+        if player.movable then
+            local crankChange = playdate.getCrankChange()
+            if playdate.buttonIsPressed(playdate.kButtonRight) or crankChange > 0 then
+                self.x = self.x + moveSpeed
+                self.state = states.run
+                self.flip = unFlipped
+                if self.x >= goalX then self:winLevel() end
+            elseif playdate.buttonIsPressed(playdate.kButtonLeft) or crankChange < 0 then
+                self.x = self.x - moveSpeed
+                if self.x < 8 then self.x = 8 end
+                self.state = states.run
+                self.flip = flipped
+            else
+                self.state = states.idle
+            end
 
-        if #self.sprite:overlappingSprites() > 0 then
-            self.state = states.dead
-            self.y = baseY
-            self.dieSprite.frame = 1
-            endGame()
-            self.dieSound:play()
+            if #self.sprite:overlappingSprites() > 0 then
+                self.state = states.dead
+                self.y = baseY
+                self.dieSprite.frame = 1
+                self.dieSound:play()
+                endGame()
+            end
         end
     end
 
