@@ -13,6 +13,7 @@ function setupGame()
     player = Player()
     sky = Sky()
     title = Title()
+    startSound = playdate.sound.sampleplayer.new("assets/audio/start")
 end
 
 function startNewGame()
@@ -21,6 +22,7 @@ function startNewGame()
     player.score:updateScore(0)
     player.movable = true
     player:reset()
+    startSound:play()
 end
 
 function endGame()
