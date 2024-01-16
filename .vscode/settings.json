@@ -1,5 +1,9 @@
 {
-  "playdate-debug.sourcePath": "./source",
-  "playdate-debug.outputPath": "./build",
-  "playdate-debug.productName": "Stoneslaught"
+  "Lua.runtime.version": "Lua 5.4",
+  "Lua.diagnostics.disable": ["undefined-global", "lowercase-global", "undefined-field", "need-check-nil", "deprecated", "param-type-mismatch", "inject-field"],
+  "Lua.diagnostics.globals": ["playdate", "import"],
+  "Lua.runtime.nonstandardSymbol": ["+=", "-=", "*=", "/=", "//=", "%=", "<<=", ">>=", "&=", "|=", "^="],
+  "Lua.workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
+  "Lua.workspace.preloadFileSize": 1000,
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
 }
